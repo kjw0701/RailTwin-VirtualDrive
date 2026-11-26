@@ -1,0 +1,67 @@
+{
+  "source": "unity\\RailTwinRails\\Assets\\Resources\\SecondPrototype\\cart.obj",
+  "sha256": "f8af0ef77324f3e829f3d62ffa3eb0cc6027a7c517dbce0f85544701cb2d6742",
+  "units": "m",
+  "axes": "X forward, Y CAD-left, Z up",
+  "warning": "CAD side names not verified against physical left/right; masses unmeasured",
+  "parts": [
+    {
+      "name": "DriveWheel_1",
+      "center_m": [
+        0.27587300000000003,
+        0.1965,
+        0.04611899999999999
+      ],
+      "size_m": [
+        0.05299999999999999,
+        0.031,
+        0.052983999999999996
+      ],
+      "triangles": 3276
+    },
+    {
+      "name": "DriveWheel001_1",
+      "center_m": [
+        0.27587300000000003,
+        -0.19651400000000002,
+        0.04611899999999999
+      ],
+      "size_m": [
+        0.05299999999999999,
+        0.031,
+        0.052983999999999996
+      ],
+      "triangles": 3276
+    },
+    {
+      "name": "IdleWheel_0",
+      "center_m": [
+        -0.27,
+        -0.193,
+        0.0485
+      ],
+      "size_m": [
+        0.05299999999999999,
+        0.031,
+        0.052984
+      ],
+      "triangles": 4284
+    },
+    {
+      "name": "IdleWheel001_0",
+      "center_m": [
+        -0.27,
+        0.193,
+        0.0485
+      ],
+      "size_m": [
+        0.05299999999999999,
+        0.031,
+        0.052984
+      ],
+      "triangles": 4284
+    }
+  ],
+  "chassis_triangles": 49172,
+  "total_triangles": 64292
+}

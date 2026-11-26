@@ -1,0 +1,31 @@
+function c=virtual_drive_config
+% Editable starting assumptions. Geometry is CAD-derived; dynamics uncalibrated.
+c = struct;
+c.speed_mps = .15;
+c.start_x_m = -.5;
+c.stop_time_s = 10;
+c.step_m = .001;
+c.bend_m = .001;
+c.defect_side = 'left'; % CAD Y-positive; physical left mapping unverified.
+c.bend_center_m = .25;
+c.bend_sigma_m = .07;
+c.rail_top_m = .0225;
+c.rail_width_m = .025;
+c.wheel_radius_m = .0235;
+c.contact_stiffness_Npm = 1e5;
+c.contact_damping_Nspm = 100;
+c.max_step_s = 1e-4;
+c.output_hz = 100;
+c.sensor_lowpass_hz = 20;
+c.chassis_mass_kg = 3;
+c.wheel_mass_kg = .1;
+c.sensor_x_m = .03;
+c.sensor_y_m = .193;
+c.imu_z_m = .1;
+c.nominal_settled_gap_m = .0035; % User-confirmed nominal physical mount.
+% Previous flat run at tip z=27.5 mm gave 3.725496 mm after settling.
+c.distance_tip_z_m = .0275 + c.nominal_settled_gap_m - .003725496;
+c.distance_min_m = .001;
+c.distance_max_m = .008;
+c.notes = 'Prototype: placeholder masses/contact/filter, CAD sides, no real-data validation';
+end

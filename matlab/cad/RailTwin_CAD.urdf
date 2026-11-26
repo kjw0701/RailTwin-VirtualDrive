@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="RailTwin_CAD">
+  <link name="world" />
+  <link name="chassis">
+    <inertial>
+      <origin xyz="0 0 0.09" rpy="0 0 0" />
+      <mass value="3" />
+      <inertia ixx="0.045" iyy="0.095" izz="0.13" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="chassis.stl" scale="1 1 1" />
+      </geometry>
+      <material name="chassis">
+        <color rgba=".55 .60 .65 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="cart_free" type="floating">
+    <parent link="world" />
+    <child link="chassis" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <link name="DriveWheel_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="2.2e-05" iyy="2.8e-05" izz="2.2e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="DriveWheel_1.stl" scale="1 1 1" />
+      </geometry>
+      <material name="DriveWheel_1">
+        <color rgba=".15 .18 .22 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="DriveWheel_1_axle" type="continuous">
+    <parent link="chassis" />
+    <child link="DriveWheel_1" />
+    <origin xyz="0.27587300000000003 0.1965 0.04611899999999999" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="DriveWheel001_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="2.2e-05" iyy="2.8e-05" izz="2.2e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="DriveWheel001_1.stl" scale="1 1 1" />
+      </geometry>
+      <material name="DriveWheel001_1">
+        <color rgba=".15 .18 .22 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="DriveWheel001_1_axle" type="continuous">
+    <parent link="chassis" />
+    <child link="DriveWheel001_1" />
+    <origin xyz="0.27587300000000003 -0.19651400000000002 0.04611899999999999" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="IdleWheel_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="2.2e-05" iyy="2.8e-05" izz="2.2e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="IdleWheel_0.stl" scale="1 1 1" />
+      </geometry>
+      <material name="IdleWheel_0">
+        <color rgba=".15 .18 .22 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="IdleWheel_0_axle" type="continuous">
+    <parent link="chassis" />
+    <child link="IdleWheel_0" />
+    <origin xyz="-0.27 -0.193 0.0485" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="IdleWheel001_0">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="2.2e-05" iyy="2.8e-05" izz="2.2e-05" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="IdleWheel001_0.stl" scale="1 1 1" />
+      </geometry>
+      <material name="IdleWheel001_0">
+        <color rgba=".15 .18 .22 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="IdleWheel001_0_axle" type="continuous">
+    <parent link="chassis" />
+    <child link="IdleWheel001_0" />
+    <origin xyz="-0.27 0.193 0.0485" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+</robot>

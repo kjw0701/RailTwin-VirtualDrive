@@ -1,0 +1,56 @@
+{
+  "speed_mps": 0.052,
+  "start_x_m": 0.28,
+  "stop_time_s": 25,
+  "step_m": 0.002,
+  "bend_m": 0,
+  "defect_side": "both",
+  "bend_center_m": 0.25,
+  "bend_sigma_m": 0.07,
+  "rail_top_m": 0.0225,
+  "rail_width_m": 0.025,
+  "wheel_radius_m": 0.0235,
+  "contact_stiffness_Npm": 100000,
+  "contact_damping_Nspm": 100,
+  "max_step_s": 0.0001,
+  "output_hz": 100,
+  "sensor_lowpass_hz": 20,
+  "chassis_mass_kg": 3,
+  "wheel_mass_kg": 0.1,
+  "sensor_x_m": 0.03,
+  "sensor_y_m": 0.193,
+  "imu_z_m": 0.1,
+  "nominal_settled_gap_m": 0.0035,
+  "distance_tip_z_m": 0.027274503999999998,
+  "distance_min_m": 0.001,
+  "distance_max_m": 0.008,
+  "notes": "Prototype: placeholder masses/contact/filter, CAD sides, no real-data validation",
+  "pipe_bounds": [
+    [
+      0,
+      0.6
+    ],
+    [
+      0.603,
+      1.203
+    ],
+    [
+      1.206,
+      1.806
+    ]
+  ],
+  "pipe_file": "pipe_L300.stl",
+  "support_model": "Fixed filament supports represented by segment elevations; no exposed metal in joint gaps",
+  "tip_lift_m": [
+    0.0029395,
+    0.002936
+  ],
+  "tip_calibration": "Effective distance ray origins fitted to normal CSV runs 31-33; physical mount unverified",
+  "run_name": "paper_pipe_step_2mm_csvfit",
+  "synthetic": true,
+  "validated_against_real": false,
+  "filter": "four cascaded RC sections, each 20Hz; illustrative, not MPU6050 calibration",
+  "acceleration_channels": "left XYZ + right XYZ, sensor frame, specific force includes gravity",
+  "motion": "Prescribed travel, lateral position and yaw guide; computed vertical/roll/pitch response",
+  "training_note": "Exclude steady_drive=false. Run-level defect parameters are not per-window labels. Split by rail/run before windowing."
+}

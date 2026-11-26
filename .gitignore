@@ -1,0 +1,4 @@
+matlab/output/
+slprj/
+*.slxc
+__pycache__/
