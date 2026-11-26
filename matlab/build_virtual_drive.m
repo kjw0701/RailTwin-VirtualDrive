@@ -70,7 +70,11 @@ for k=1:4
     chart=find(sfroot,'-isa','Stateflow.EMChart','Path',[model '/' name '_ContactLaw']);
     law='rail_contact_kernel.m';
     if isfield(c,'pipe_bounds')
-        set_param(cb,'Value',mat2str([cp reshape(c.pipe_bounds.',1,[])],17));
+        rail=PaperRail(c,sign(manifest.parts(k).center_m(2)));
+        % The compiled block receives position, velocity, then these constants.
+        segments=[rail.Bounds rail.Heights];
+        contact=[c.wheel_radius_m c.contact_stiffness_Npm c.contact_damping_Nspm];
+        set_param(cb,'Value',mat2str([contact reshape(segments.',1,[])],17));
         law='pipe_contact_kernel.m';
     end
     chart.Script=fileread(fullfile(here,law));

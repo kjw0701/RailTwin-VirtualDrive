@@ -9,27 +9,24 @@ rot=sample(simout.body_R,t,9);
 dist=zeros(n,2); specific=zeros(n,6); linear=zeros(n,6); gyro=zeros(n,6);
 tipZ=repmat(c.distance_tip_z_m,1,2);
 if isfield(c,'tip_lift_m'), tipZ=tipZ+c.tip_lift_m; end
+sideSigns=[1 -1];
+for side=1:2
+    sensors(side)=ChassisIMU(c,sideSigns(side));
+    if isfield(c,'pipe_bounds')
+        rails(side)=PaperRail(c,sideSigns(side));
+    end
+end
 for k=1:n
     R=reshape(rot(k,:),3,3);
     for s=1:2
-        signy=3-2*s;
-        r=[c.sensor_x_m;signy*c.sensor_y_m;c.imu_z_m]; rw=R*r;
-        aw=a(k,:)'+cross(alpha(k,:)',rw)+cross(w(k,:)',cross(w(k,:)',rw));
+        signy=sideSigns(s);
         cols=(s-1)*3+(1:3);
-        specific(k,cols)=(R'*(aw-[0;0;-9.80665]))';
-        linear(k,cols)=(R'*aw)'; gyro(k,cols)=(R'*w(k,:)')';
+        [specific(k,cols),linear(k,cols),gyro(k,cols)]=sensors(s).observe( ...
+            R,a(k,:)',w(k,:)',alpha(k,:)');
         tip=p(k,:)'+R*[c.sensor_x_m;signy*c.sensor_y_m;tipZ(s)];
         active=strcmp(c.defect_side,'both')||(s==1&&strcmp(c.defect_side,'left'))||(s==2&&strcmp(c.defect_side,'right'));
         if isfield(c,'pipe_bounds')
-            direction=-R(:,3); dist(k,s)=NaN;
-            for j=1:3
-                railHeight=c.rail_top_m+(j==2)*active*c.step_m;
-                lambda=(railHeight-tip(3))/direction(3);
-                hit=tip+lambda*direction;
-                if lambda>=0 && hit(1)>=c.pipe_bounds(j,1) && hit(1)<=c.pipe_bounds(j,2) && abs(hit(2)-signy*.193)<=c.rail_width_m/2
-                    if isnan(dist(k,s)) || lambda<dist(k,s), dist(k,s)=lambda; end
-                end
-            end
+            dist(k,s)=rails(s).rayDistance(tip,-R(:,3));
         else
             dist(k,s)=rail_ray_distance(tip,-R(:,3),active*c.step_m,active*c.bend_m,c.rail_top_m);
         end

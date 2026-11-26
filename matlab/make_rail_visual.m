@@ -4,13 +4,15 @@ here=fileparts(mfilename('fullpath')); filename=fullfile(here,'cad',['rail_' sid
 if isfield(c,'pipe_bounds')
     filename=fullfile(here,'cad',['paper_pipe_' side '.stl']);
     source=stlread(fullfile(here,'cad',c.pipe_file)); p=source.Points(:,[3 1 2])/1000;
-    assert(max(abs((max(p)-min(p))-[.300 .025 .025]))<1e-6);
-    V=[]; F=[]; yc=.193*(2*strcmp(side,'left')-1);
+    sourceSize=[PaperRail.SourcePipeLengthM repmat(PaperRail.SourcePipeWidthM,1,2)];
+    assert(max(abs((max(p)-min(p))-sourceSize))<1e-6);
+    rail=PaperRail(c,2*strcmp(side,'left')-1);
+    V=[]; F=[]; yc=rail.CenterY;
     for j=1:3
         bounds=c.pipe_bounds(j,:); verts=p;
-        verts(:,1)=bounds(1)+p(:,1)*diff(bounds)/.300;
+        verts(:,1)=bounds(1)+p(:,1)*diff(bounds)/PaperRail.SourcePipeLengthM;
         verts(:,2)=yc+p(:,2);
-        verts(:,3)=p(:,3)-max(p(:,3))+c.rail_top_m+(j==2)*c.step_m;
+        verts(:,3)=p(:,3)-max(p(:,3))+rail.Heights(j);
         F=[F;source.ConnectivityList+size(V,1)]; V=[V;verts];
     end
     stlwrite(triangulation(F,V),filename); return
